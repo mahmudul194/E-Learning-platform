@@ -38,31 +38,31 @@ export default function PaymentGatewaysBanner() {
     <section className="py-16 bg-white border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 rounded-3xl p-8 lg:p-12 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-6 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold border border-sky-500/30 uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4" />
-                <span>100% Secure Bangladeshi Payment Gateway</span>
+                <span>100% Secure Payment Gateways</span>
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                সহজ কিস্তিতে ফি পরিশোধের সুযোগ
+                Flexible Installment & Easy Payments
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                শিক্ষার্থীদের সুবিধার জন্য আমাদের সকল দীর্ঘমেয়াদী কোর্সে ৩ মাসের সহজ কিস্তিতে পেমেন্ট করার সুব্যবস্থা রয়েছে। কোনো এক্সট্রা চার্জ ছাড়াই পছন্দের লোকাল গেটওয়ে দিয়ে ফি পরিশোধ করুন।
+              <p className="text-sm text-slate-300 leading-relaxed">
+                For student convenience, all our long-term courses feature flexible 3-month installment plans. Pay safely with zero hidden charges using your preferred gateway.
               </p>
 
-              <div className="space-y-2 pt-2 text-xs text-slate-300">
+              <div className="space-y-2 pt-2 text-xs sm:text-sm text-slate-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>অটোমেটিক ইনস্ট্যান্ট ইনভয়েস ও রিসিট জেনারেশন</span>
+                  <span>Automatic Instant Invoice & Receipt Generation</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>এসএমএস ও ইমেইলে পেমেন্ট কনফার্মেশন</span>
+                  <span>SMS & Email Payment Confirmation</span>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ export default function PaymentGatewaysBanner() {
               {methods.map((method) => (
                 <div
                   key={method.name}
-                  className="bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl flex flex-col justify-between hover:border-emerald-500/50 transition-colors"
+                  className="bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl flex flex-col justify-between hover:border-sky-500/50 transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-base font-extrabold text-white">{method.name}</span>
@@ -80,8 +80,8 @@ export default function PaymentGatewaysBanner() {
                       Active
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 font-medium mb-1">{method.type}</p>
-                  <p className="text-[10px] text-slate-400">{method.desc}</p>
+                  <p className="text-xs text-slate-300 font-medium mb-1">{method.type}</p>
+                  <p className="text-[11px] text-slate-400">{method.desc}</p>
                 </div>
               ))}
             </div>

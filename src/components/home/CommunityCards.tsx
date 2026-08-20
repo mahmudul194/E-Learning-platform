@@ -77,7 +77,7 @@ export default function CommunityCards() {
                   href={c.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-8 py-3 rounded-xl bg-[#ea580c] hover:bg-[#c2410c] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all hover:scale-105"
+                  className="inline-block px-8 py-3 rounded-xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all hover:scale-105"
                 >
                   Join Now
                 </a>

@@ -2,56 +2,57 @@
 
 import React from "react";
 import Link from "next/link";
+import CourseCard, { CourseCardItem } from "@/components/courses/CourseCard";
 
 export default function FeaturedCourses() {
-  const courses = [
+  const courses: CourseCardItem[] = [
     {
-      id: "revit-arch-struct-5th",
-      title: "Professional Revit Architecture + Structure Course (5th Batch)",
-      tag: "ARCHITECTURE + STRUCTURE",
-      discount: "-20%",
-      badge: "Expert",
-      duration: "Duration: 3 to 4 Months …",
-      price: "12,000.00",
-      originalPrice: "15,000.00",
-      image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "revit-arch-struct-installment",
-      title: "Professional Revit Architecture + Structure Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
-      tag: "ARCHITECTURE + STRUCTURE",
-      discount: "-20%",
-      badge: "Expert",
-      duration: "Duration: 3 to 4 Months …",
-      price: "12,000.00",
-      originalPrice: "15,000.00",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: "revit-combo-full",
-      title: "Professional Revit Combo Course Architecture, Structure & MEP (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
-      tag: "ARCHITECTURE + STRUCTURE + MEP + NAVISWORKS",
+      id: "revit-combo-pro",
+      title: "Professional Revit Combo Course (Architecture, Structure & MEP) (3-Month Installment Available)",
+      tag: "COMBO",
       discount: "-40%",
       badge: "Expert",
       duration: "Duration: 5 to 6 Months …",
       price: "15,000.00",
       originalPrice: "25,000.00",
+      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: "revit-arch-struct",
+      title: "Professional Revit Architecture & Structure (3-Month Installment Available)",
+      tag: "ARCH + STRUCT",
+      discount: "-38%",
+      badge: "Expert",
+      duration: "Duration: 4 to 5 Months …",
+      price: "12,500.00",
+      originalPrice: "20,000.00",
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: "revit-mep",
+      title: "Professional Revit MEP & HVAC Masterclass (3-Month Installment Available)",
+      tag: "MEP & HVAC",
+      discount: "-30%",
+      badge: "Expert",
+      duration: "Duration: 2 to 3 Months …",
+      price: "7,000.00",
+      originalPrice: "10,000.00",
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80",
     },
     {
-      id: "revit-arch-only",
-      title: "Professional Revit Architecture Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      id: "revit-architecture-only",
+      title: "Professional Revit Architecture Course (3-Month Installment Available)",
       tag: "ARCHITECTURE",
       discount: "-30%",
       badge: "Expert",
       duration: "Duration: 2 to 3 Months …",
       price: "7,000.00",
       originalPrice: "10,000.00",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
     },
     {
-      id: "revit-struct-only",
-      title: "Professional Revit Structure Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      id: "revit-structure-only",
+      title: "Professional Revit Structure Course (3-Month Installment Available)",
       tag: "STRUCTURE",
       discount: "-30%",
       badge: "Expert",
@@ -62,7 +63,7 @@ export default function FeaturedCourses() {
     },
     {
       id: "revit-mep-only",
-      title: "Professional Revit MEP Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      title: "Professional Revit MEP Course (3-Month Installment Available)",
       tag: "MEP",
       discount: "-30%",
       badge: "Expert",
@@ -73,7 +74,7 @@ export default function FeaturedCourses() {
     },
     {
       id: "revit-navisworks-only",
-      title: "Professional Revit Navisworks Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      title: "Professional Revit Navisworks Course (3-Month Installment Available)",
       tag: "NAVISWORKS",
       discount: "-40%",
       badge: "Expert",
@@ -84,7 +85,7 @@ export default function FeaturedCourses() {
     },
     {
       id: "autocad-only",
-      title: "Professional AutoCAD Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      title: "Professional AutoCAD Course (3-Month Installment Available)",
       tag: "AUTOCAD",
       discount: "-25%",
       badge: "Expert",
@@ -95,7 +96,7 @@ export default function FeaturedCourses() {
     },
     {
       id: "dynamo-only",
-      title: "Professional Revit Dynamo Course (৩ মাসে ধাপে ধাপে পেমেন্ট সুবিধা)",
+      title: "Professional Revit Dynamo Course (3-Month Installment Available)",
       tag: "DYNAMO",
       discount: "-33%",
       badge: "Expert",
@@ -109,77 +110,24 @@ export default function FeaturedCourses() {
   return (
     <section className="py-20 lg:py-24 bg-white">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 space-y-14">
-        {/* Bengali Headline matching Screenshot 4 */}
+        {/* Section Headline */}
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0f172a] tracking-tight">
-            বিস্তারিত মডিউল দেখতে নিচের কোর্সে ক্লিক করুন (পেমেন্ট বিস্তারিত{" "}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002b5b] tracking-tight">
+            Explore All Courses (Installment Details Available on{" "}
             <Link
               href="/admission"
-              className="text-[#ea580c] relative inline-block underline decoration-2 decoration-[#ea580c] underline-offset-4 font-black"
+              className="text-[#0077b6] relative inline-block underline decoration-2 decoration-[#0077b6] underline-offset-4 font-black hover:text-[#0f4c81]"
             >
               Admission
             </Link>{" "}
-            এ দেখুন)
+            Page)
           </h2>
         </div>
 
-        {/* 3x3 Course Grid with Enhanced Dimensions */}
+        {/* 3x3 Course Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {courses.map((course) => (
-            <Link
-              key={course.id}
-              href={`/courses/${course.id}`}
-              className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col group hover:-translate-y-2"
-            >
-              {/* Card Thumbnail */}
-              <div className="relative h-60 sm:h-64 w-full bg-slate-900 overflow-hidden">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
-                />
-
-                {/* Discount Badge */}
-                <div className="absolute top-3.5 left-3.5 bg-[#ea580c] text-white text-xs sm:text-sm font-black px-3 py-1 rounded-md shadow-md">
-                  {course.discount}
-                </div>
-
-                {/* Tag Banner */}
-                <div className="absolute top-3.5 right-3.5 bg-black/65 backdrop-blur-xs text-white text-[11px] font-black px-3 py-1 rounded-md uppercase tracking-wider">
-                  {course.tag}
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-7 flex-1 flex flex-col justify-between space-y-5">
-                <div>
-                  {/* Expert Pink Badge */}
-                  <span className="inline-block px-3 py-1 rounded-md text-xs font-black bg-rose-50 text-rose-600 border border-rose-100 mb-3">
-                    {course.badge}
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-base sm:text-[17px] font-bold text-slate-900 group-hover:text-[#ea580c] transition-colors leading-snug line-clamp-2">
-                    {course.title}
-                  </h3>
-
-                  {/* Duration */}
-                  <p className="text-xs sm:text-sm font-medium text-slate-500 mt-2.5">
-                    {course.duration}
-                  </p>
-                </div>
-
-                {/* Price */}
-                <div className="pt-4 border-t border-slate-100 flex items-baseline gap-3">
-                  <span className="text-lg sm:text-xl font-black text-[#ea580c]">
-                    ৳{course.price}
-                  </span>
-                  <span className="text-xs sm:text-sm text-slate-400 line-through">
-                    ৳{course.originalPrice}
-                  </span>
-                </div>
-              </div>
-            </Link>
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </div>
