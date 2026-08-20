@@ -1,8 +1,14 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname();
+
+  if (pathname && pathname.startsWith("/dashboard")) {
+    return null;
+  }
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <a
