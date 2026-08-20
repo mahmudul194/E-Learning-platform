@@ -1,25 +1,41 @@
 import React from "react";
+import Link from "next/link";
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="py-12 bg-slate-50 min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-xs space-y-6 text-slate-700 text-xs sm:text-sm">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">গোপনীয়তা নীতি (Privacy Policy)</h1>
-        <p className="text-slate-500">সর্বশেষ আপডেট: আগস্ট ২০২৬</p>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-xs space-y-6 text-slate-700 text-sm">
+        {/* Breadcrumb */}
+        <div className="text-xs text-slate-400 font-medium">
+          <Link href="/" className="hover:text-slate-600 transition-colors">
+            Home
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-slate-700 font-semibold">Privacy Policy</span>
+        </div>
 
-        <section className="space-y-2">
-          <h2 className="text-base font-bold text-slate-900">১. তথ্য সংগ্রহ ও ব্যবহার</h2>
-          <p>Advance BIM Institute শিক্ষার্থীদের নাম, ইমেইল, মোবাইল নম্বর এবং পেশাগত তথ্য শুধুমাত্র ভর্তি, ক্লাস লিঙ্ক সরবরাহ ও সার্টিফিকেট প্রস্তুতকরণের উদ্দেশ্যে সংরক্ষণ করে।</p>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Privacy Policy</h1>
+        <p className="text-xs text-slate-500 font-mono">Last Updated: August 2026</p>
+
+        <section className="space-y-2 pt-2">
+          <h2 className="text-base font-bold text-slate-900">1. Information Collection and Use</h2>
+          <p className="leading-relaxed">
+            BIM Build BD collects student full names, email addresses, phone numbers, and professional backgrounds strictly for admission verification, Zoom class link distribution, learning portal access, and official QR-verified certificate issuance.
+          </p>
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-slate-900">২. পেমেন্ট ও লেনদেন নিরাপত্তা</h2>
-          <p>বিকাশ, নগদ, রকেট ও SSLCommerz-এর মাধ্যমে কৃত সকল লেনদেন এনক্রিপ্টেড এবং ব্যাংকিং সিকিউরিটি প্রোটোকল মেনে সম্পন্ন হয়।</p>
+          <h2 className="text-base font-bold text-slate-900">2. Payment and Transaction Security</h2>
+          <p className="leading-relaxed">
+            All payments made through bKash, Nagad, Rocket, or SSLCommerz (Credit/Debit cards) are processed over end-to-end encrypted banking gateways complying with international PCI-DSS security protocols. We do not store credit card numbers or banking PINs.
+          </p>
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-slate-900">৩. তথ্যের সুরক্ষা</h2>
-          <p>শিক্ষার্থীদের কোনো ব্যক্তিগত তথ্য কোনো তৃতীয় পক্ষের কাছে বিক্রয় বা শেয়ার করা হয় না।</p>
+          <h2 className="text-base font-bold text-slate-900">3. Data Protection & Non-Disclosure</h2>
+          <p className="leading-relaxed">
+            Student personal information is kept strictly confidential and is never shared, rented, or sold to third-party marketing services under any circumstances.
+          </p>
         </section>
       </div>
     </div>

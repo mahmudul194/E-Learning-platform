@@ -8,15 +8,15 @@ export default function SuccessStoriesPage() {
     <div className="py-12 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
-            <Award className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100 text-[#002b5b] text-xs font-bold uppercase tracking-wider">
+            <Award className="w-3.5 h-3.5 text-[#0077b6]" />
             <span>Alumni & Success Stories</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            শিক্ষার্থীদের সাফল্য ও ক্যারিয়ার প্লেসমেন্ট
+            Student Success & Career Placements
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600">
-            আমাদের প্রাক্তন শিক্ষার্থীদের বাস্তব ক্যারিয়ার অভিজ্ঞতা ও তাদের অনুপ্রেরণামূলক যাত্রা।
+          <p className="text-sm text-slate-600">
+            Real feedback and career trajectories from graduates currently working at leading AEC consultancies and international remote contracting roles.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export default function SuccessStoriesPage() {
                     <Star key={i} className="w-4 h-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic mb-6">
+                <p className="text-sm text-slate-700 leading-relaxed italic mb-6">
                   &ldquo;{review.comment}&rdquo;
                 </p>
               </div>
@@ -45,8 +45,8 @@ export default function SuccessStoriesPage() {
                 />
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">{review.name}</h4>
-                  <p className="text-xs text-emerald-600 font-semibold">{review.role}</p>
-                  <p className="text-[11px] text-slate-400">{review.company}</p>
+                  <p className="text-xs text-[#0077b6] font-bold">{review.role}</p>
+                  <p className="text-xs text-slate-400">{review.company}</p>
                 </div>
               </div>
             </div>

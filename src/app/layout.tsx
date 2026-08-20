@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import TopBar from "@/components/layout/TopBar";
-import Navbar from "@/components/layout/Navbar";
+import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/common/FloatingWhatsApp";
 
@@ -14,9 +13,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "IMS | Learn BIM Build Your Career",
+  title: "BIM Build BD | Learn BIM Build Your Career",
   description:
-    "Professional BIM, Revit Architecture, Structure, MEP, Navisworks, AutoCAD & Dynamo Online Learning Platform. Build Smart. Lead Ahead.",
+    "Professional BIM, Revit Architecture, Structure, MEP, Navisworks, AutoCAD & Dynamo Online Learning Platform. Plan • Build • Deliver.",
 };
 
 export default function RootLayout({
@@ -25,15 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} font-sans h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-orange-500 selection:text-white font-sans">
-        {/* Sticky Header Container (TopBar + Navbar together) */}
-        <header className="sticky top-0 z-50 shadow-xs">
-          <TopBar />
-          <Navbar />
-        </header>
+    <html lang="en" className={`${jakarta.variable} font-sans h-full antialiased overflow-x-clip w-full max-w-full`}>
+      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-[#0077b6] selection:text-white font-sans overflow-x-clip w-full max-w-full">
+        {/* Dynamic Animated Sticky Header */}
+        <Header />
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 w-full max-w-full overflow-x-clip">{children}</main>
         <Footer />
         <FloatingWhatsApp />
       </body>

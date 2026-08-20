@@ -10,16 +10,16 @@ export default function FaqPage() {
   const extendedFaqs = [
     ...FAQS,
     {
-      question: "আমি কি মোবাইল দিয়ে ক্লাস করতে পারব?",
-      answer: "লাইভ ক্লাস মোবাইলের মাধ্যমেও দেখা ও শোনা যাবে, তবে প্র্যাকটিসের জন্য একটি ল্যাপটপ বা ডেস্কটপ কম্পিউটার (ন্যূনতম Core i5 / Ryzen 5, 8GB/16GB RAM) আবশ্যক।",
+      question: "Can I attend live classes via smartphone?",
+      answer: "Yes, you can join and listen to live Zoom sessions on a mobile device. However, for hands-on practice, modeling, and assignments, a laptop or desktop computer (recommended: Core i5 / Ryzen 5 with 8GB/16GB RAM and a dedicated GPU) is required.",
     },
     {
-      question: "কোর্সের ক্লাস শিডিউল কখন নির্ধারণ করা হয়?",
-      answer: "অধিকাংশ ক্লাস রাতের শিফটে (রাত ৮:৩০ বা ৯:০০ টা থেকে) অনুষ্ঠিত হয় যাতে বিশ্ববিদ্যালয়ের শিক্ষার্থী ও চাকুরিজীবী উভয়েই স্বাচ্ছন্দ্যে অংশ নিতে পারেন।",
+      question: "What are the standard class timings?",
+      answer: "Most live batches are scheduled in the evening (8:30 PM or 9:00 PM BST) so university students and working professionals can comfortably participate without schedule conflicts.",
     },
     {
-      question: "কিস্তির টাকা পরিশোধের নিয়ম কী?",
-      answer: "ভর্তি হওয়ার সময় ১ম কিস্তি দিয়ে রেজিস্ট্রেশন সম্পন্ন করতে হবে। ২য় কিস্তি কোর্স শুরুর ৩০ দিন পর এবং ৩য় কিস্তি ৬০ দিন পর bKash, Nagad বা অনলাইন পোর্টালে সরাসরি পে করা যাবে।",
+      question: "How does the 3-month installment payment work?",
+      answer: "You pay the 1st installment upon registration. The 2nd installment is due 30 days after class commencement, and the 3rd installment at 60 days. Payments can be completed online via bKash, Nagad, Rocket, or credit/debit card.",
     },
   ];
 
@@ -27,15 +27,15 @@ export default function FaqPage() {
     <div className="py-12 bg-slate-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
-            <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100 text-[#002b5b] text-xs font-bold uppercase tracking-wider">
+            <HelpCircle className="w-3.5 h-3.5 text-[#0077b6]" />
             <span>FAQ & Knowledge Base</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            সচরাচর জিজ্ঞাসিত সকল প্রশ্ন (FAQ)
+            Frequently Asked Questions (FAQ)
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600">
-            Advance BIM Institute-এর কোর্স, ক্লাস মেথড, ফি কিস্তি ও সার্টিফিকেট সংক্রান্ত যাবতীয় তথ্য।
+          <p className="text-sm text-slate-600">
+            Everything you need to know about BIM Build BD courses, class methods, installments, and certification.
           </p>
         </div>
 
@@ -49,18 +49,18 @@ export default function FaqPage() {
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-emerald-700 transition-colors"
+                  className="w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-sm sm:text-base hover:text-[#0077b6] transition-colors cursor-pointer"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-emerald-600" : ""
+                      isOpen ? "rotate-180 text-[#0077b6]" : ""
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                  <div className="px-6 pb-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
                     {faq.answer}
                   </div>
                 )}
