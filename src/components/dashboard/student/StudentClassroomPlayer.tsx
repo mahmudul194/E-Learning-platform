@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, ChevronDown, CheckCircle2, PlayCircle, Lock, Download, ArrowLeft } from "lucide-react";
 import { EnrolledCourse, EnrolledLesson } from "@/types/dashboard";
+import CustomVideoPlayer from "./CustomVideoPlayer";
 
 interface StudentClassroomPlayerProps {
   course: EnrolledCourse;
@@ -83,7 +84,13 @@ export default function StudentClassroomPlayer({ course, onBackToCourses }: Stud
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8 space-y-5">
           <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs space-y-4">
-            <div className="relative aspect-video bg-black"><iframe src={activeLesson?.videoUrl} title={activeLesson?.title} className="w-full h-full border-0" allowFullScreen /></div>
+            {/* Whitelabel Custom BIM Video Player */}
+            <CustomVideoPlayer
+              title={activeLesson?.title || "BIM Engineering Class"}
+              videoUrl={activeLesson?.videoUrl}
+              onEnded={handleNextAndComplete}
+            />
+
             <div className="p-6 sm:p-7 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                 <div>
