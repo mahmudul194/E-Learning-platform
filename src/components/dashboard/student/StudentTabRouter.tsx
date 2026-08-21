@@ -38,7 +38,7 @@ export default function StudentTabRouter({
   onOpenUpload,
 }: StudentTabRouterProps) {
   return (
-    <>
+    <div key={studentTab} className="animate-fade-in-up space-y-8">
       {studentTab === "overview" && (
         <StudentOverviewTab
           currentUser={currentUser}
@@ -68,6 +68,6 @@ export default function StudentTabRouter({
       {studentTab === "payments" && <StudentPaymentsTab />}
       {studentTab === "certificate" && <StudentCertificateTab currentUser={currentUser} />}
       {studentTab === "profile" && <StudentProfileTab currentUser={currentUser} />}
-    </>
+    </div>
   );
 }

@@ -79,15 +79,21 @@ export default function LoginForm({ loading, onLoginSubmit }: LoginFormProps) {
         </Link>
       </div>
 
-      {/* Submit Button */}
+      {/* Submit Button with Animated Spinner */}
       <div className="pt-2">
         <button
           type="submit"
           disabled={loading}
           className="w-full py-3.5 rounded-xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-extrabold text-sm sm:text-base shadow-md shadow-sky-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-70 flex items-center justify-center gap-2"
         >
-          <span>{loading ? "Logging in..." : "Log In to /dashboard"}</span>
-          <ArrowRight className="w-4 h-4" />
+          {loading ? (
+            <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+          ) : (
+            <>
+              <span>Log In to Dashboard</span>
+              <ArrowRight className="w-4 h-4" />
+            </>
+          )}
         </button>
       </div>
     </form>

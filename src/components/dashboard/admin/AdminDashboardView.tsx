@@ -49,7 +49,7 @@ export default function AdminDashboardView() {
   };
 
   return (
-    <div className="space-y-8 font-sans">
+    <div className="animate-fade-in-up space-y-8 font-sans">
       {/* Admin Banner */}
       <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
         <div className="space-y-1">

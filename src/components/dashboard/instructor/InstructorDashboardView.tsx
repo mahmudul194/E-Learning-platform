@@ -27,7 +27,7 @@ export default function InstructorDashboardView({
   setInstructorTab,
 }: InstructorDashboardViewProps) {
   return (
-    <div className="space-y-8 font-sans">
+    <div key={instructorTab} className="animate-fade-in-up space-y-8 font-sans">
       {instructorTab === "overview" && (
         <InstructorOverviewTab
           currentUser={currentUser}

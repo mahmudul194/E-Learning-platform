@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/common/FloatingWhatsApp";
+import RouteProgressBar from "@/components/common/RouteProgressBar";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -26,6 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} font-sans h-full antialiased overflow-x-clip w-full max-w-full`}>
       <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-[#0077b6] selection:text-white font-sans overflow-x-clip w-full max-w-full">
+        {/* Global Route Loading Bar */}
+        <RouteProgressBar />
+
         {/* Dynamic Animated Sticky Header */}
         <Header />
 
