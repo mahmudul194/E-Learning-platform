@@ -116,7 +116,12 @@ export default function UnifiedDashboardPage() {
           )}
 
           {/* Admin Role Views */}
-          {currentRole === "admin" && <AdminDashboardView />}
+          {currentRole === "admin" && (
+            <AdminDashboardView
+              adminTab={adminTab}
+              setAdminTab={setAdminTab}
+            />
+          )}
         </main>
       </div>
 
