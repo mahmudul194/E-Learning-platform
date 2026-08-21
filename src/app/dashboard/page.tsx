@@ -66,7 +66,6 @@ export default function UnifiedDashboardPage() {
       {/* 1. Full-Height Docked Left Sidebar */}
       <DashboardSidebar
         currentRole={currentRole}
-        currentUser={currentUser}
         isMobileOpen={isMobileSidebarOpen}
         onCloseMobile={() => setIsMobileSidebarOpen(false)}
         studentTab={studentTab}

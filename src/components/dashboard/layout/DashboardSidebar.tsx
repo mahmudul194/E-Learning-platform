@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { UserAccount } from "@/data/dummyAccounts";
 import {
   StudentDashboardTab,
   InstructorDashboardTab,
@@ -13,12 +12,10 @@ import {
   ADMIN_NAV_ITEMS,
 } from "./dashboardNavConfig";
 import DashboardBrandHeader from "./DashboardBrandHeader";
-import DashboardUserProfileCard from "./DashboardUserProfileCard";
 import DashboardSidebarFooter from "./DashboardSidebarFooter";
 
 interface DashboardSidebarProps {
   currentRole: "student" | "instructor" | "admin";
-  currentUser: UserAccount;
   isMobileOpen: boolean;
   onCloseMobile: () => void;
   studentTab: StudentDashboardTab;
@@ -31,7 +28,6 @@ interface DashboardSidebarProps {
 
 export default function DashboardSidebar({
   currentRole,
-  currentUser,
   isMobileOpen,
   onCloseMobile,
   studentTab,
@@ -90,11 +86,8 @@ export default function DashboardSidebar({
             onCloseMobile={onCloseMobile}
           />
 
-          {/* Modern Floating User Profile Card */}
-          <DashboardUserProfileCard currentUser={currentUser} />
-
           {/* Navigation Links */}
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-1.5 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1.5 custom-scrollbar">
             {currentNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTabId === item.id;
@@ -102,13 +95,13 @@ export default function DashboardSidebar({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer group ${
+                  className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer group ${
                     isActive
                       ? "bg-gradient-to-r from-[#0077b6] to-[#0284c7] text-white shadow-md shadow-sky-950/40 border border-sky-400/25"
                       : "text-slate-300 hover:bg-white/[0.07] hover:text-white hover:translate-x-0.5"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3.5">
                     <Icon
                       className={`w-4.5 h-4.5 transition-colors ${
                         isActive ? "text-white" : "text-sky-300 group-hover:text-sky-200"

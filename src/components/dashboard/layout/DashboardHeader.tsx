@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Menu, Search, MessageCircle, LogOut } from "lucide-react";
+import { Menu, Search, LogOut } from "lucide-react";
 import { UserAccount } from "@/data/dummyAccounts";
 import DashboardHeaderNotifications from "./DashboardHeaderNotifications";
 
@@ -56,25 +56,14 @@ export default function DashboardHeader({
           />
         </div>
 
-        {/* Right: Real Functionality (Help Support, Notifications & User Mini Profile) */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Quick Helpline Support Pill */}
-          <a
-            href="https://wa.me/8801879526108"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold transition-colors"
-          >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>Support</span>
-          </a>
-
+        {/* Right: Notifications & User Profile */}
+        <div className="flex items-center gap-3">
           {/* Interactive Notifications Center */}
           <DashboardHeaderNotifications />
 
           <div className="h-6 w-px bg-slate-200 hidden sm:block" />
 
-          {/* User Mini Profile Avatar */}
+          {/* User Mini Profile Avatar & Role */}
           <div className="flex items-center gap-2.5 pl-1">
             <div className="relative">
               <img
@@ -85,7 +74,7 @@ export default function DashboardHeader({
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
             </div>
             <div className="hidden lg:block text-left leading-tight">
-              <span className="text-xs font-extrabold text-slate-900 block truncate max-w-[120px]">
+              <span className="text-xs font-extrabold text-slate-900 block truncate max-w-[140px]">
                 {currentUser.name}
               </span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
