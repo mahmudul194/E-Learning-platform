@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { UserCheck, Search, Plus, Phone, Mail } from "lucide-react";
+import { UserCheck, Search, Plus, Phone, Mail, Star } from "lucide-react";
 import AdminAddInstructorModal from "./AdminAddInstructorModal";
 
 export interface InstructorRecord {
@@ -37,15 +37,15 @@ export default function AdminInstructorsTab() {
   const handleAddInstructor = (t: InstructorRecord) => setInstructors((p) => [t, ...p]);
 
   return (
-    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6 font-sans">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+    <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5 font-sans">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
         <div>
           <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             <UserCheck className="w-5 h-5 text-[#0077b6]" />
-            <span>Instructor & Mentor Directory</span>
+            <span>Instructor & Trainer Management Directory</span>
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Manage lead BIM trainers, assigned live batches, student ratios & performance ratings
+            Assigned lead BIM instructors, active live batches, student ratios & performance ratings
           </p>
         </div>
 
@@ -58,53 +58,79 @@ export default function AdminInstructorsTab() {
         </button>
       </div>
 
-      <div className="relative max-w-md">
-        <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-        <input
-          type="text"
-          placeholder="Search by trainer name, email or specialty..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm focus:bg-white focus:border-[#0077b6] focus:outline-none"
-        />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="relative max-w-md w-full">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            placeholder="Search by trainer name, email or specialty..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm focus:bg-white focus:border-[#0077b6] focus:outline-none"
+          />
+        </div>
+        <span className="px-3 py-1 rounded-full bg-sky-50 text-[#0077b6] text-xs font-bold border border-sky-200 shrink-0">
+          {filtered.length} Active Instructors
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {filtered.map((ins) => (
-          <div key={ins.id} className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 hover:border-sky-300 transition-all">
-            <div className="flex items-start justify-between">
-              <div>
-                <strong className="text-base font-extrabold text-slate-900 block">{ins.name}</strong>
-                <span className="text-xs text-[#0077b6] font-bold">{ins.role}</span>
-              </div>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">{ins.status}</span>
-            </div>
-
-            <p className="text-xs text-slate-600 bg-white p-2 rounded-xl border border-slate-200 font-medium">
-              Specialty: <span className="font-bold text-slate-800">{ins.specialty}</span>
-            </p>
-
-            <div className="grid grid-cols-3 gap-2 text-center text-xs">
-              <div className="p-2 rounded-xl bg-white border border-slate-200">
-                <span className="text-[10px] text-slate-400 block font-bold">Batches</span>
-                <span className="font-extrabold text-slate-900">{ins.batchesCount}</span>
-              </div>
-              <div className="p-2 rounded-xl bg-white border border-slate-200">
-                <span className="text-[10px] text-slate-400 block font-bold">Students</span>
-                <span className="font-extrabold text-[#0077b6]">{ins.studentsCount.toLocaleString()}</span>
-              </div>
-              <div className="p-2 rounded-xl bg-white border border-slate-200">
-                <span className="text-[10px] text-slate-400 block font-bold">Rating</span>
-                <span className="font-extrabold text-amber-800 font-mono">★ {ins.rating}</span>
-              </div>
-            </div>
-
-            <div className="pt-2 border-t border-slate-200 space-y-1 text-xs text-slate-500 font-mono">
-              <div className="flex items-center gap-2 truncate"><Phone className="w-3.5 h-3.5 text-[#0077b6] shrink-0" /><span>{ins.phone}</span></div>
-              <div className="flex items-center gap-2 truncate"><Mail className="w-3.5 h-3.5 text-[#0077b6] shrink-0" /><span className="truncate">{ins.email}</span></div>
-            </div>
-          </div>
-        ))}
+      {/* Instructors Data Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs sm:text-sm">
+          <thead className="bg-slate-50 text-slate-700 border-y border-slate-200">
+            <tr>
+              <th className="p-3.5">Instructor & Designation</th>
+              <th className="p-3.5">Technical Specialty</th>
+              <th className="p-3.5">Batches</th>
+              <th className="p-3.5">Students</th>
+              <th className="p-3.5">Rating</th>
+              <th className="p-3.5">Contact Info</th>
+              <th className="p-3.5">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {filtered.map((ins) => (
+              <tr key={ins.id} className="hover:bg-slate-50 transition-colors">
+                <td className="p-3.5 font-semibold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-sky-50 text-[#0077b6] flex items-center justify-center font-bold text-xs border border-sky-100 shrink-0">
+                      {ins.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                    </div>
+                    <div>
+                      <div className="font-extrabold text-slate-900">{ins.name}</div>
+                      <div className="text-[11px] text-[#0077b6] font-bold">{ins.role}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-3.5">
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium text-xs">
+                    {ins.specialty}
+                  </span>
+                </td>
+                <td className="p-3.5 font-mono font-bold text-slate-900">
+                  <span className="px-2 py-0.5 rounded bg-sky-50 text-[#0077b6] text-xs font-bold border border-sky-200">
+                    {ins.batchesCount} Batches
+                  </span>
+                </td>
+                <td className="p-3.5 font-mono font-bold text-slate-800">
+                  {ins.studentsCount.toLocaleString()}
+                </td>
+                <td className="p-3.5 font-mono font-extrabold text-amber-800">
+                  ★ {ins.rating}
+                </td>
+                <td className="p-3.5 text-slate-600 font-mono text-[11px] space-y-0.5">
+                  <div className="flex items-center gap-1.5"><Phone className="w-3 h-3 text-[#0077b6]" /> {ins.phone}</div>
+                  <div className="flex items-center gap-1.5"><Mail className="w-3 h-3 text-[#0077b6]" /> {ins.email}</div>
+                </td>
+                <td className="p-3.5">
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+                    {ins.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <AdminAddInstructorModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAdd={handleAddInstructor} />
