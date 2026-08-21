@@ -35,11 +35,6 @@ export default function CustomVideoPlayer({ videoUrl, title, onEnded }: CustomVi
     }
   };
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const t = Number(e.target.value);
-    if (videoRef.current) { videoRef.current.currentTime = t; setCurrentTime(t); }
-  };
-
   const skip = (sec: number) => {
     if (videoRef.current) videoRef.current.currentTime = Math.max(0, Math.min(duration, videoRef.current.currentTime + sec));
   };
@@ -91,10 +86,17 @@ export default function CustomVideoPlayer({ videoUrl, title, onEnded }: CustomVi
   const fmt = (s: number) => isNaN(s) || !isFinite(s) ? "00:00" : `${Math.floor(s / 60).toString().padStart(2, "0")}:${Math.floor(s % 60).toString().padStart(2, "0")}`;
 
   if (isYouTube) {
-    const embedUrl = videoUrl?.includes("embed") ? videoUrl : `https://www.youtube.com/embed/${videoUrl?.split("v=")[1]?.split("&")[0] || ""}`;
+    let embedUrl = videoUrl || "";
+    if (embedUrl.includes("youtu.be/")) {
+      const id = embedUrl.split("youtu.be/")[1]?.split("?")[0]?.split("&")[0];
+      embedUrl = `https://www.youtube.com/embed/${id}`;
+    } else if (embedUrl.includes("watch?v=")) {
+      const id = embedUrl.split("watch?v=")[1]?.split("&")[0];
+      embedUrl = `https://www.youtube.com/embed/${id}`;
+    }
     return (
       <div className="relative aspect-video bg-black overflow-hidden rounded-2xl group select-none font-sans border border-slate-800">
-        <iframe key={videoUrl} src={`${embedUrl}?rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`} title={title} className="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        <iframe key={embedUrl} src={`${embedUrl}?rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`} title={title} className="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
         <div className="absolute top-0 inset-x-0 p-3 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between text-white pointer-events-none">
           <span className="text-xs sm:text-sm font-bold text-white/95 drop-shadow-md truncate max-w-lg">{title}</span>
         </div>
@@ -119,7 +121,7 @@ export default function CustomVideoPlayer({ videoUrl, title, onEnded }: CustomVi
       )}
 
       <div className={`absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent transition-opacity space-y-2 ${showControls ? "opacity-100" : "opacity-0"}`}>
-        <input type="range" min={0} max={duration || 100} step={0.1} value={currentTime} onChange={handleSeek} style={{ background: `linear-gradient(to right, #0077b6 0%, #0077b6 ${progressPct}%, rgba(255,255,255,0.2) ${progressPct}%, rgba(255,255,255,0.2) 100%)` }} className="w-full h-1.5 hover:h-2 rounded-lg appearance-none cursor-pointer accent-[#0077b6] transition-all" />
+        <input type="range" min={0} max={duration || 100} step={0.1} value={currentTime} onChange={(e) => { const t = Number(e.target.value); if (videoRef.current) { videoRef.current.currentTime = t; setCurrentTime(t); } }} style={{ background: `linear-gradient(to right, #0077b6 0%, #0077b6 ${progressPct}%, rgba(255,255,255,0.2) ${progressPct}%, rgba(255,255,255,0.2) 100%)` }} className="w-full h-1.5 hover:h-2 rounded-lg appearance-none cursor-pointer accent-[#0077b6] transition-all" />
         <div className="flex items-center justify-between text-white text-xs">
           <div className="flex items-center gap-2 sm:gap-3">
             <button onClick={togglePlay} className="p-1 hover:text-sky-400 cursor-pointer">{isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}</button>
