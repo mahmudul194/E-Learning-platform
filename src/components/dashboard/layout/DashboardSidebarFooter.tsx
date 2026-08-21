@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { HelpCircle, Home, LogOut } from "lucide-react";
+import { HelpCircle, LogOut } from "lucide-react";
 
 export default function DashboardSidebarFooter() {
   return (
@@ -20,14 +20,7 @@ export default function DashboardSidebarFooter() {
         +880 1879-526108
       </a>
 
-      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-        <Link
-          href="/"
-          className="text-xs text-slate-300 hover:text-white flex items-center gap-1.5 font-bold"
-        >
-          <Home className="w-3.5 h-3.5" />
-          <span>Home</span>
-        </Link>
+      <div className="pt-2 border-t border-white/10 flex items-center justify-end">
         <Link
           href="/login"
           className="text-xs text-rose-300 hover:text-rose-200 flex items-center gap-1 font-bold"
