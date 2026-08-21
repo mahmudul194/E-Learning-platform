@@ -1,40 +1,76 @@
 "use client";
 
 import React from "react";
-import { TrendingUp, Users, Layers, Award } from "lucide-react";
+import { TrendingUp, Users, Layers, Award, DollarSign } from "lucide-react";
 
 export default function AdminMetricsGrid() {
+  const metrics = [
+    {
+      label: "Monthly Revenue",
+      value: "৳4,85,000",
+      trend: "+14.2% vs last month",
+      trendPositive: true,
+      icon: DollarSign,
+      sub: "Total Gross Income",
+    },
+    {
+      label: "Enrolled Students",
+      value: "5,240",
+      trend: "+182 new enrollments",
+      trendPositive: true,
+      icon: Users,
+      sub: "Active in 8 Programs",
+    },
+    {
+      label: "Active Live Batches",
+      value: "6 Batches",
+      trend: "480 Total Seats",
+      trendPositive: true,
+      icon: Layers,
+      sub: "Revit, Tekla, Dynamo",
+    },
+    {
+      label: "Issued Certificates",
+      value: "3,820",
+      trend: "100% QR Verified",
+      trendPositive: true,
+      icon: Award,
+      sub: "Industry Recognized",
+    },
+  ];
+
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 font-sans">
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
-        <span className="text-xs sm:text-sm text-slate-500 font-bold">Monthly Revenue</span>
-        <div className="text-2xl sm:text-3xl font-black text-emerald-600">৳4,85,000</div>
-        <span className="text-xs text-emerald-700 font-bold flex items-center gap-1">
-          <TrendingUp className="w-3.5 h-3.5" /> +12.5% Growth
-        </span>
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 font-sans">
+      {metrics.map((m, idx) => {
+        const Icon = m.icon;
+        return (
+          <div
+            key={idx}
+            className="bg-white/95 backdrop-blur-xs p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-sky-300 transition-all space-y-3 group"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-500 tracking-wide uppercase">{m.label}</span>
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100/80 text-[#0077b6] flex items-center justify-center border border-sky-200/60 shadow-xs group-hover:scale-105 transition-transform">
+                <Icon className="w-5 h-5" />
+              </div>
+            </div>
 
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
-        <span className="text-xs sm:text-sm text-slate-500 font-bold">Total Students</span>
-        <div className="text-2xl sm:text-3xl font-black text-[#002b5b]">5,240</div>
-        <span className="text-xs text-[#0077b6] font-bold flex items-center gap-1">
-          <Users className="w-3.5 h-3.5" /> 182 New This Month
-        </span>
-      </div>
+            <div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
+                {m.value}
+              </div>
+              <div className="text-[11px] text-slate-400 font-medium mt-0.5">{m.sub}</div>
+            </div>
 
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
-        <span className="text-xs sm:text-sm text-slate-500 font-bold">Active Batches</span>
-        <div className="text-2xl sm:text-3xl font-black text-[#0f4c81]">6 Batches</div>
-        <span className="text-xs text-slate-500 font-medium">Revit, Tekla, MEP</span>
-      </div>
-
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
-        <span className="text-xs sm:text-sm text-slate-500 font-bold">Issued Certificates</span>
-        <div className="text-2xl sm:text-3xl font-black text-[#0077b6]">3,820</div>
-        <span className="text-xs text-[#0077b6] font-bold flex items-center gap-1">
-          <Award className="w-3.5 h-3.5" /> QR Verified
-        </span>
-      </div>
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-mono">
+                <TrendingUp className="w-3 h-3 text-emerald-600" />
+                {m.trend}
+              </span>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

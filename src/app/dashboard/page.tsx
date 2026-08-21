@@ -39,7 +39,6 @@ export default function UnifiedDashboardPage() {
   const [activeAssignmentId, setActiveAssignmentId] = useState<number | null>(null);
   const [selectedClassVideo, setSelectedClassVideo] = useState<ClassVideo | null>(null);
 
-  // Synchronize active role from localStorage
   useEffect(() => {
     const savedRole = typeof window !== "undefined" ? (localStorage.getItem("bim_user_role") as any) : null;
     if (savedRole && ["student", "instructor", "admin"].includes(savedRole)) {
@@ -62,7 +61,7 @@ export default function UnifiedDashboardPage() {
   const activeVideo = selectedClassVideo || MOCK_DASHBOARD_CLASSES[0];
 
   return (
-    <div className="bg-[#f4f7fa] min-h-screen text-slate-900 flex font-sans w-full">
+    <div className="bg-[#f8fafc] bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] min-h-screen text-slate-900 flex font-sans w-full">
       {/* 1. Full-Height Docked Left Sidebar */}
       <DashboardSidebar
         currentRole={currentRole}
@@ -86,7 +85,7 @@ export default function UnifiedDashboardPage() {
           setSearchQuery={setSearchQuery}
         />
 
-        <main className="flex-1 p-5 sm:p-8 lg:p-10 space-y-8 max-w-[1600px] w-full">
+        <main className="flex-1 p-4 sm:p-7 lg:p-9 space-y-7 max-w-[1600px] w-full">
           {/* Student Role Views */}
           {currentRole === "student" && (
             <StudentTabRouter
