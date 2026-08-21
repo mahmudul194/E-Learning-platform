@@ -72,8 +72,8 @@ export default function AdminOverviewTab({
 
         <AdminPaymentQueueTable
           pendingApprovals={pendingApprovals}
-          onApprove={handleApprove}
-          onReject={handleReject}
+          onApprove={onApprove}
+          onReject={onReject}
         />
       </div>
     </div>
