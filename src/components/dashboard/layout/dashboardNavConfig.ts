@@ -9,6 +9,8 @@ import {
   Upload,
   Users,
   Layers,
+  FolderTree,
+  TicketPercent,
   BarChart3,
   User,
   LucideIcon,
@@ -46,6 +48,8 @@ export const ADMIN_NAV_ITEMS: NavItem[] = [
   { id: "admissions", label: "Admissions & TrxID", icon: CreditCard, badge: "2 Pending" },
   { id: "students", label: "Student Database", icon: Users, badge: "5,240" },
   { id: "batches", label: "Batch Manager", icon: Layers },
+  { id: "modules", label: "Module Uploader", icon: FolderTree, badge: "New" },
+  { id: "coupons", label: "Coupon Engine", icon: TicketPercent, badge: "Active" },
   { id: "revenue", label: "Financial Reports", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: User },
 ];

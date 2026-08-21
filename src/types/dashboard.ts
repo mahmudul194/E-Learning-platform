@@ -48,6 +48,38 @@ export interface PendingApproval {
   status: "Pending" | "Approved" | "Rejected";
 }
 
+export interface CourseLessonItem {
+  id: string;
+  title: string;
+  videoUrl: string;
+  duration: string;
+  resourcesCount: number;
+}
+
+export interface CourseModuleItem {
+  id: string;
+  courseId: string;
+  courseName: string;
+  moduleNo: string;
+  moduleTitle: string;
+  duration: string;
+  lessons: CourseLessonItem[];
+}
+
+export interface CouponItem {
+  id: string;
+  code: string;
+  discountType: "percentage" | "flat";
+  discountValue: number;
+  minOrderAmount: number;
+  maxDiscount?: number;
+  expiryDate: string;
+  usageLimit: number;
+  usedCount: number;
+  applicableCourse: string;
+  isActive: boolean;
+}
+
 export type StudentDashboardTab =
   | "overview"
   | "courses"
@@ -71,5 +103,7 @@ export type AdminDashboardTab =
   | "admissions"
   | "students"
   | "batches"
+  | "modules"
+  | "coupons"
   | "revenue"
   | "settings";

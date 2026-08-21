@@ -1,5 +1,3 @@
-import { PendingApproval } from "@/types/dashboard";
-
 export interface AdminStudent {
   id: string;
   name: string;
@@ -22,7 +20,14 @@ export interface AdminBatch {
   enrolledStudents: number;
   maxSeats: number;
   startDate: string;
-  fee: string;
+  regularFee: string;
+  discountFee: string;
+  fbGroupUrl: string;
+  schedule: string;
+  duration: string;
+  softwareVersion: string;
+  metaTitle: string;
+  metaKeywords: string;
   status: "Enrolling" | "Ongoing" | "Completed";
 }
 
@@ -66,19 +71,6 @@ export const MOCK_ADMIN_STUDENTS: AdminStudent[] = [
     paymentStatus: "Paid",
     joinDate: "Aug 12, 2026",
   },
-  {
-    id: "std-4",
-    name: "Kazi Sazzad Hossain",
-    roll: "BIM-2026-0870",
-    email: "sazzad.bim@gmail.com",
-    phone: "+880 1644-556677",
-    course: "Revit Dynamo Automation",
-    batch: "2nd Batch",
-    paidAmount: "৳5,000",
-    totalFee: "৳10,000",
-    paymentStatus: "Partial",
-    joinDate: "Aug 15, 2026",
-  },
 ];
 
 export const MOCK_ADMIN_BATCHES: AdminBatch[] = [
@@ -90,7 +82,14 @@ export const MOCK_ADMIN_BATCHES: AdminBatch[] = [
     enrolledStudents: 42,
     maxSeats: 50,
     startDate: "Sep 01, 2026",
-    fee: "৳18,000",
+    regularFee: "৳22,000",
+    discountFee: "৳18,000",
+    fbGroupUrl: "https://facebook.com/groups/bim-revit-combo-8th",
+    schedule: "Mon, Wed, Fri (9:00 PM - 11:00 PM)",
+    duration: "4.5 Months (45 Classes)",
+    softwareVersion: "Revit 2024 + Dynamo 2.19",
+    metaTitle: "Revit Architecture, Structure & MEP Online Batch",
+    metaKeywords: "BIM Bangladesh, Revit Training, Tekla Detailing",
     status: "Enrolling",
   },
   {
@@ -101,7 +100,14 @@ export const MOCK_ADMIN_BATCHES: AdminBatch[] = [
     enrolledStudents: 36,
     maxSeats: 40,
     startDate: "Jul 15, 2026",
-    fee: "৳14,000",
+    regularFee: "৳16,000",
+    discountFee: "৳14,000",
+    fbGroupUrl: "https://facebook.com/groups/bim-revit-arch-5th",
+    schedule: "Sun, Tue, Thu (9:00 PM - 11:00 PM)",
+    duration: "3.5 Months (36 Classes)",
+    softwareVersion: "Autodesk Revit 2024",
+    metaTitle: "Revit Architecture & Structure Masterclass",
+    metaKeywords: "Revit Architecture, Structural BIM Modeling",
     status: "Ongoing",
   },
   {
@@ -112,7 +118,14 @@ export const MOCK_ADMIN_BATCHES: AdminBatch[] = [
     enrolledStudents: 30,
     maxSeats: 35,
     startDate: "Aug 01, 2026",
-    fee: "৳12,000",
+    regularFee: "৳15,000",
+    discountFee: "৳12,000",
+    fbGroupUrl: "https://facebook.com/groups/bim-tekla-steel-3rd",
+    schedule: "Sat, Mon, Wed (8:30 PM - 10:30 PM)",
+    duration: "3 Months (30 Classes)",
+    softwareVersion: "Tekla Structures 2024",
+    metaTitle: "Tekla Steel Detailing Industrial Training",
+    metaKeywords: "Tekla Structures, Steel Fabrication, BNBC Detailing",
     status: "Ongoing",
   },
 ];

@@ -6,6 +6,8 @@ import AdminOverviewTab from "./AdminOverviewTab";
 import AdminAdmissionsTab from "./AdminAdmissionsTab";
 import AdminStudentsTab from "./AdminStudentsTab";
 import AdminBatchesTab from "./AdminBatchesTab";
+import AdminModulesTab from "./AdminModulesTab";
+import AdminCouponsTab from "./AdminCouponsTab";
 import AdminRevenueTab from "./AdminRevenueTab";
 import AdminSettingsTab from "./AdminSettingsTab";
 import AdminCreateBatchModal from "./AdminCreateBatchModal";
@@ -87,6 +89,10 @@ export default function AdminDashboardView({
 
       {adminTab === "batches" && <AdminBatchesTab />}
 
+      {adminTab === "modules" && <AdminModulesTab />}
+
+      {adminTab === "coupons" && <AdminCouponsTab />}
+
       {adminTab === "revenue" && <AdminRevenueTab />}
 
       {adminTab === "settings" && <AdminSettingsTab />}
@@ -95,7 +101,7 @@ export default function AdminDashboardView({
         isOpen={isCreateBatchModalOpen}
         onClose={() => setIsCreateBatchModalOpen(false)}
         onCreate={(newBatch: AdminBatch) => {
-          alert(`Batch ${newBatch.name} (${newBatch.code}) created successfully!`);
+          alert(`Batch ${newBatch.name} (${newBatch.code}) launched successfully!`);
         }}
       />
     </div>
