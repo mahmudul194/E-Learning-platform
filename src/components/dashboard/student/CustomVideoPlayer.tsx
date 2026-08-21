@@ -9,7 +9,7 @@ interface CustomVideoPlayerProps {
   onEnded?: () => void;
 }
 
-export default function CustomVideoPlayer({ title, onEnded }: CustomVideoPlayerProps) {
+export default function CustomVideoPlayer({ videoUrl, title, onEnded }: CustomVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -22,6 +22,7 @@ export default function CustomVideoPlayer({ title, onEnded }: CustomVideoPlayerP
   const [showControls, setShowControls] = useState(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const isYouTube = videoUrl && (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be"));
   const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
   const volumePct = isMuted ? 0 : volume * 100;
 
@@ -43,18 +44,12 @@ export default function CustomVideoPlayer({ title, onEnded }: CustomVideoPlayerP
     if (videoRef.current) videoRef.current.currentTime = Math.max(0, Math.min(duration, videoRef.current.currentTime + sec));
   };
 
-  const changeSpeed = (rate: number) => {
-    setPlaybackRate(rate);
-    if (videoRef.current) videoRef.current.playbackRate = rate;
-  };
-
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
     if (!document.fullscreenElement) { containerRef.current.requestFullscreen?.().catch(() => {}); setIsFullscreen(true); }
     else { document.exitFullscreen?.().catch(() => {}); setIsFullscreen(false); }
   };
 
-  // Keyboard shortcuts: Space/K (Play/Pause), ArrowRight/L (+10s), ArrowLeft/J (-10s), ArrowUp/Down (Vol), M (Mute), F (Fullscreen)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement)?.tagName;
@@ -95,14 +90,24 @@ export default function CustomVideoPlayer({ title, onEnded }: CustomVideoPlayerP
 
   const fmt = (s: number) => isNaN(s) || !isFinite(s) ? "00:00" : `${Math.floor(s / 60).toString().padStart(2, "0")}:${Math.floor(s % 60).toString().padStart(2, "0")}`;
 
+  if (isYouTube) {
+    const embedUrl = videoUrl?.includes("embed") ? videoUrl : `https://www.youtube.com/embed/${videoUrl?.split("v=")[1]?.split("&")[0] || ""}`;
+    return (
+      <div className="relative aspect-video bg-black overflow-hidden rounded-2xl group select-none font-sans border border-slate-800">
+        <iframe key={videoUrl} src={`${embedUrl}?rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`} title={title} className="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        <div className="absolute top-0 inset-x-0 p-3 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between text-white pointer-events-none">
+          <span className="text-xs sm:text-sm font-bold text-white/95 drop-shadow-md truncate max-w-lg">{title}</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} onMouseMove={handleMouseMove} onContextMenu={(e) => e.preventDefault()} className="relative aspect-video bg-slate-950 overflow-hidden rounded-2xl group select-none font-sans">
-      <video ref={videoRef} onTimeUpdate={() => videoRef.current && setCurrentTime(videoRef.current.currentTime)} onLoadedMetadata={() => videoRef.current && setDuration(videoRef.current.duration)} onEnded={() => { setIsPlaying(false); onEnded?.(); }} onError={() => setIsPlaying(false)} onClick={togglePlay} className="w-full h-full object-cover cursor-pointer" playsInline preload="metadata">
-        <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+      <video ref={videoRef} key={videoUrl} onTimeUpdate={() => videoRef.current && setCurrentTime(videoRef.current.currentTime)} onLoadedMetadata={() => videoRef.current && setDuration(videoRef.current.duration)} onEnded={() => { setIsPlaying(false); onEnded?.(); }} onError={() => setIsPlaying(false)} onClick={togglePlay} className="w-full h-full object-cover cursor-pointer" playsInline preload="metadata">
+        <source src={videoUrl || "https://vjs.zencdn.net/v/oceans.mp4"} type="video/mp4" />
       </video>
 
-      {/* Top Header - Pure Lecture Title */}
       <div className={`absolute top-0 inset-x-0 p-4 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between text-white transition-opacity pointer-events-none ${showControls ? "opacity-100" : "opacity-0"}`}>
         <span className="text-xs sm:text-sm font-bold text-white/95 drop-shadow-md truncate max-w-lg">{title}</span>
       </div>
@@ -113,27 +118,23 @@ export default function CustomVideoPlayer({ title, onEnded }: CustomVideoPlayerP
         </button>
       )}
 
-      {/* Bottom Custom Controls Bar */}
       <div className={`absolute bottom-0 inset-x-0 p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent transition-opacity space-y-2 ${showControls ? "opacity-100" : "opacity-0"}`}>
         <input type="range" min={0} max={duration || 100} step={0.1} value={currentTime} onChange={handleSeek} style={{ background: `linear-gradient(to right, #0077b6 0%, #0077b6 ${progressPct}%, rgba(255,255,255,0.2) ${progressPct}%, rgba(255,255,255,0.2) 100%)` }} className="w-full h-1.5 hover:h-2 rounded-lg appearance-none cursor-pointer accent-[#0077b6] transition-all" />
-
         <div className="flex items-center justify-between text-white text-xs">
           <div className="flex items-center gap-2 sm:gap-3">
             <button onClick={togglePlay} className="p-1 hover:text-sky-400 cursor-pointer">{isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}</button>
-            <button onClick={() => skip(-10)} title="Rewind 10s (Left Arrow)" className="p-1 hover:text-sky-400 cursor-pointer"><RotateCcw className="w-3.5 h-3.5" /></button>
-            <button onClick={() => skip(10)} title="Forward 10s (Right Arrow)" className="p-1 hover:text-sky-400 cursor-pointer"><RotateCw className="w-3.5 h-3.5" /></button>
+            <button onClick={() => skip(-10)} title="Rewind 10s" className="p-1 hover:text-sky-400 cursor-pointer"><RotateCcw className="w-3.5 h-3.5" /></button>
+            <button onClick={() => skip(10)} title="Forward 10s" className="p-1 hover:text-sky-400 cursor-pointer"><RotateCw className="w-3.5 h-3.5" /></button>
             <span className="font-mono text-[11px] text-slate-300">{fmt(currentTime)} / {fmt(duration)}</span>
-
             <div className="hidden sm:flex items-center gap-1.5 pl-2">
               <button onClick={() => { if (videoRef.current) { videoRef.current.muted = !isMuted; setIsMuted(!isMuted); } }} title="Mute (M)" className="hover:text-sky-400 cursor-pointer">{isMuted || volume === 0 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}</button>
               <input type="range" min={0} max={1} step={0.02} value={isMuted ? 0 : volume} onChange={(e) => { const v = Number(e.target.value); setVolume(v); if (videoRef.current) { videoRef.current.volume = v; videoRef.current.muted = v === 0; setIsMuted(v === 0); } }} style={{ background: `linear-gradient(to right, #0077b6 0%, #0077b6 ${volumePct}%, rgba(255,255,255,0.2) ${volumePct}%, rgba(255,255,255,0.2) 100%)` }} className="w-16 h-1 hover:h-1.5 rounded appearance-none cursor-pointer accent-[#0077b6] transition-all" />
             </div>
           </div>
-
           <div className="flex items-center gap-2">
             <div className="flex items-center bg-black/40 rounded-lg p-0.5 border border-slate-700 text-[11px] font-mono">
               {[1, 1.25, 1.5, 2].map((r) => (
-                <button key={r} onClick={() => changeSpeed(r)} className={`px-1.5 py-0.5 rounded cursor-pointer ${playbackRate === r ? "bg-[#0077b6] text-white font-bold" : "text-slate-400 hover:text-white"}`}>{r}x</button>
+                <button key={r} onClick={() => { setPlaybackRate(r); if (videoRef.current) videoRef.current.playbackRate = r; }} className={`px-1.5 py-0.5 rounded cursor-pointer ${playbackRate === r ? "bg-[#0077b6] text-white font-bold" : "text-slate-400 hover:text-white"}`}>{r}x</button>
               ))}
             </div>
             <button onClick={toggleFullscreen} title="Fullscreen (F)" className="p-1 hover:text-sky-400 cursor-pointer">{isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}</button>
