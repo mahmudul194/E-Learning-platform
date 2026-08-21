@@ -46,13 +46,7 @@ export interface PendingApproval {
   amount: string;
   phone: string;
   status: "Pending" | "Approved" | "Rejected";
-  trxId?: string;
-  advancePaid?: string;
-  totalFee?: string;
-  dueAmount?: string;
-  batch?: string;
-  email?: string;
-  note?: string;
+  trxId?: string; advancePaid?: string; totalFee?: string; dueAmount?: string; batch?: string; email?: string; note?: string;
 }
 
 export interface CourseLessonItem {
@@ -85,6 +79,38 @@ export interface CouponItem {
   usedCount: number;
   applicableCourse: string;
   isActive: boolean;
+}
+
+export interface EnrolledLesson {
+  id: string;
+  lessonNo: number;
+  title: string;
+  duration: string;
+  videoUrl: string;
+  description: string;
+  resources: { name: string; size: string; type: string }[];
+  isCompleted: boolean;
+  isUnlocked: boolean;
+}
+
+export interface EnrolledModule {
+  id: string;
+  moduleNo: string;
+  title: string;
+  lessons: EnrolledLesson[];
+}
+
+export interface EnrolledCourse {
+  id: string;
+  title: string;
+  category: string;
+  batch: string;
+  instructor: string;
+  thumbnail: string;
+  totalLessons: number;
+  completedLessons: number;
+  progressPercent: number;
+  modules: EnrolledModule[];
 }
 
 export type StudentDashboardTab =

@@ -50,13 +50,7 @@ export default function StudentTabRouter({
           onNavigateToResources={() => setStudentTab("resources")}
         />
       )}
-      {studentTab === "courses" && (
-        <StudentCoursePlayerTab
-          classesList={classesList}
-          activeVideo={activeVideo}
-          onSelectVideo={onSelectVideo}
-        />
-      )}
+      {studentTab === "courses" && <StudentCoursePlayerTab />}
       {studentTab === "live" && <StudentLiveScheduleTab liveClasses={liveClasses} />}
       {studentTab === "assignments" && (
         <StudentAssignmentsTab
