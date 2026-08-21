@@ -2,11 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { Menu, Search, LogOut } from "lucide-react";
+import { Menu, Search, MessageCircle, LogOut } from "lucide-react";
+import { UserAccount } from "@/data/dummyAccounts";
+import DashboardHeaderNotifications from "./DashboardHeaderNotifications";
 
 interface DashboardHeaderProps {
   currentRole: "student" | "instructor" | "admin";
-  onSwitchRole: (role: "student" | "instructor" | "admin") => void;
+  currentUser: UserAccount;
   onOpenMobileSidebar: () => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
@@ -14,36 +16,36 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({
   currentRole,
-  onSwitchRole,
+  currentUser,
   onOpenMobileSidebar,
   searchQuery,
   setSearchQuery,
 }: DashboardHeaderProps) {
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-20 px-5 sm:px-8 py-3.5 shadow-xs font-sans">
+    <header className="bg-white border-b border-slate-200 sticky top-0 z-20 px-4 sm:px-8 py-3 shadow-xs font-sans">
       <div className="flex items-center justify-between gap-4">
-        {/* Left: Mobile Toggle & Page Title */}
+        {/* Left: Mobile Menu Toggle & Dynamic Portal Title */}
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMobileSidebar}
-            className="lg:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Open Sidebar"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-5 h-5" />
           </button>
 
           <div className="hidden sm:block">
-            <h2 className="text-lg font-black text-slate-900 leading-tight">
+            <h2 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
               {currentRole === "student" && "Student Learning Portal"}
               {currentRole === "instructor" && "Instructor & Trainer Console"}
               {currentRole === "admin" && "Super Admin & Control Center"}
             </h2>
-            <p className="text-xs text-slate-500">Welcome to your BIM Build BD workspace</p>
+            <p className="text-[11px] text-slate-500">Welcome to your BIM Build BD workspace</p>
           </div>
         </div>
 
-        {/* Center Search Bar */}
-        <div className="hidden md:flex items-center relative w-72 lg:w-96">
+        {/* Center: Search Bar */}
+        <div className="hidden md:flex items-center relative w-64 lg:w-96">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -54,47 +56,51 @@ export default function DashboardHeader({
           />
         </div>
 
-        {/* Right: Role Switcher Chips & Logout */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs sm:text-sm">
-            <button
-              onClick={() => onSwitchRole("student")}
-              className={`px-3 py-1.5 rounded-lg font-extrabold transition-all cursor-pointer ${
-                currentRole === "student"
-                  ? "bg-[#002b5b] text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Student
-            </button>
-            <button
-              onClick={() => onSwitchRole("instructor")}
-              className={`px-3 py-1.5 rounded-lg font-extrabold transition-all cursor-pointer ${
-                currentRole === "instructor"
-                  ? "bg-[#002b5b] text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Instructor
-            </button>
-            <button
-              onClick={() => onSwitchRole("admin")}
-              className={`px-3 py-1.5 rounded-lg font-extrabold transition-all cursor-pointer ${
-                currentRole === "admin"
-                  ? "bg-[#002b5b] text-white shadow-xs"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Admin
-            </button>
+        {/* Right: Real Functionality (Help Support, Notifications & User Mini Profile) */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* Quick Helpline Support Pill */}
+          <a
+            href="https://wa.me/8801879526108"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            <span>Support</span>
+          </a>
+
+          {/* Interactive Notifications Center */}
+          <DashboardHeaderNotifications />
+
+          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+
+          {/* User Mini Profile Avatar */}
+          <div className="flex items-center gap-2.5 pl-1">
+            <div className="relative">
+              <img
+                src={currentUser.avatar}
+                alt={currentUser.name}
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-cover border border-slate-300 shadow-2xs"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
+            </div>
+            <div className="hidden lg:block text-left leading-tight">
+              <span className="text-xs font-extrabold text-slate-900 block truncate max-w-[120px]">
+                {currentUser.name}
+              </span>
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
+                {currentRole}
+              </span>
+            </div>
           </div>
 
+          {/* Logout Quick Link */}
           <Link
             href="/login"
             title="Log Out"
-            className="p-2.5 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors hidden sm:block"
+            className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="w-4 h-4" />
           </Link>
         </div>
       </div>
