@@ -108,7 +108,13 @@ export default function UnifiedDashboardPage() {
           )}
 
           {/* Instructor Role Views */}
-          {currentRole === "instructor" && <InstructorDashboardView currentUser={currentUser} />}
+          {currentRole === "instructor" && (
+            <InstructorDashboardView
+              currentUser={currentUser}
+              instructorTab={instructorTab}
+              setInstructorTab={setInstructorTab}
+            />
+          )}
 
           {/* Admin Role Views */}
           {currentRole === "admin" && <AdminDashboardView />}
