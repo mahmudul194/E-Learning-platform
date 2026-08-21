@@ -5,6 +5,7 @@ import { AdminDashboardTab, PendingApproval } from "@/types/dashboard";
 import AdminOverviewTab from "./AdminOverviewTab";
 import AdminAdmissionsTab from "./AdminAdmissionsTab";
 import AdminStudentsTab from "./AdminStudentsTab";
+import AdminInstructorsTab from "./AdminInstructorsTab";
 import AdminBatchesTab from "./AdminBatchesTab";
 import AdminModulesTab from "./AdminModulesTab";
 import AdminCouponsTab from "./AdminCouponsTab";
@@ -86,6 +87,8 @@ export default function AdminDashboardView({
       )}
 
       {adminTab === "students" && <AdminStudentsTab />}
+
+      {adminTab === "instructors" && <AdminInstructorsTab />}
 
       {adminTab === "batches" && <AdminBatchesTab />}
 

@@ -16,11 +16,18 @@ import {
   LucideIcon,
 } from "lucide-react";
 
+export interface NavSubItem {
+  id: string;
+  label: string;
+  badge?: string;
+}
+
 export interface NavItem {
   id: string;
   label: string;
   icon: LucideIcon;
   badge?: string;
+  children?: NavSubItem[];
 }
 
 export const STUDENT_NAV_ITEMS: NavItem[] = [
@@ -46,7 +53,16 @@ export const INSTRUCTOR_NAV_ITEMS: NavItem[] = [
 export const ADMIN_NAV_ITEMS: NavItem[] = [
   { id: "overview", label: "Admin Overview", icon: Sparkles },
   { id: "admissions", label: "Admissions & TrxID", icon: CreditCard, badge: "2 Pending" },
-  { id: "students", label: "Student Database", icon: Users, badge: "5,240" },
+  {
+    id: "user_management",
+    label: "User Management",
+    icon: Users,
+    badge: "5.2k",
+    children: [
+      { id: "students", label: "Student Directory", badge: "5,240" },
+      { id: "instructors", label: "Trainer & Mentors", badge: "3 Active" },
+    ],
+  },
   { id: "batches", label: "Batch Manager", icon: Layers },
   { id: "modules", label: "Module Uploader", icon: FolderTree, badge: "New" },
   { id: "coupons", label: "Coupon Engine", icon: TicketPercent, badge: "Active" },

@@ -109,6 +109,7 @@ export type AdminDashboardTab =
   | "overview"
   | "admissions"
   | "students"
+  | "instructors"
   | "batches"
   | "modules"
   | "coupons"
