@@ -46,6 +46,13 @@ export interface PendingApproval {
   amount: string;
   phone: string;
   status: "Pending" | "Approved" | "Rejected";
+  trxId?: string;
+  advancePaid?: string;
+  totalFee?: string;
+  dueAmount?: string;
+  batch?: string;
+  email?: string;
+  note?: string;
 }
 
 export interface CourseLessonItem {
