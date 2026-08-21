@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
-import { X, UploadCloud, FileCheck } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { X, UploadCloud } from "lucide-react";
 
 interface AssignmentUploadModalProps {
   isOpen: boolean;
@@ -12,10 +13,16 @@ export default function AssignmentUploadModal({
   isOpen,
   onClose,
 }: AssignmentUploadModalProps) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
-    <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 font-sans animate-fade-in">
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 font-sans animate-fade-in">
       <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-100 ring-1 ring-black/5 animate-scale-in">
         <div className="flex items-start justify-between border-b border-slate-100 pb-3.5">
           <div className="flex items-center gap-3">
@@ -81,6 +88,7 @@ export default function AssignmentUploadModal({
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

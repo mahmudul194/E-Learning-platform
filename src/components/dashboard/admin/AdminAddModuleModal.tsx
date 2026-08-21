@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { FolderTree, X } from "lucide-react";
 import { CourseModuleItem } from "@/types/dashboard";
 
@@ -17,6 +18,7 @@ export default function AdminAddModuleModal({
   selectedCourseName,
   onAddModule,
 }: AdminAddModuleModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState({
     moduleNo: "Module 04",
     moduleTitle: "",
@@ -25,7 +27,11 @@ export default function AdminAddModuleModal({
     videoUrl: "https://vimeo.com/76979871",
   });
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,8 +57,8 @@ export default function AdminAddModuleModal({
 
   const update = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  return (
-    <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 font-sans animate-fade-in overflow-y-auto">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 font-sans animate-fade-in overflow-y-auto">
       <div className="bg-white rounded-3xl max-w-2xl w-full p-7 sm:p-9 space-y-5 shadow-2xl border border-slate-100 ring-1 ring-black/5 animate-scale-in my-8 text-xs sm:text-sm">
         <div className="flex items-start justify-between border-b border-slate-100 pb-4">
           <div className="flex items-center gap-3.5">
@@ -69,7 +75,6 @@ export default function AdminAddModuleModal({
           </button>
         </div>
 
-        {/* Prominent Selected Course Scope Highlight */}
         <div className="p-4 rounded-2xl bg-sky-50/80 border border-sky-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
           <div className="flex items-center gap-2.5 min-w-0">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
@@ -112,6 +117,7 @@ export default function AdminAddModuleModal({
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

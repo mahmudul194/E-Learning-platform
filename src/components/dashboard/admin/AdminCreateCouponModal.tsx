@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { TicketPercent, X } from "lucide-react";
 import { CouponItem } from "@/types/dashboard";
 
@@ -15,6 +16,7 @@ export default function AdminCreateCouponModal({
   onClose,
   onCreateCoupon,
 }: AdminCreateCouponModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState({
     code: "",
     discountType: "percentage" as "percentage" | "flat",
@@ -25,7 +27,11 @@ export default function AdminCreateCouponModal({
     applicableCourse: "All Courses",
   });
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,8 +52,8 @@ export default function AdminCreateCouponModal({
 
   const update = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  return (
-    <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 font-sans animate-fade-in overflow-y-auto">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 font-sans animate-fade-in overflow-y-auto">
       <div className="bg-white rounded-3xl max-w-2xl w-full p-7 sm:p-9 space-y-6 shadow-2xl border border-slate-100 ring-1 ring-black/5 animate-scale-in my-8 text-xs sm:text-sm">
         <div className="flex items-start justify-between border-b border-slate-100 pb-4">
           <div className="flex items-center gap-3.5">
@@ -111,6 +117,7 @@ export default function AdminCreateCouponModal({
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
