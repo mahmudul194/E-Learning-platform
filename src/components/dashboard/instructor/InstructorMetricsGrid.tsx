@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star } from "lucide-react";
+import { Star, BookOpen, Users, FileCheck, Award } from "lucide-react";
 import { InstructorBatch } from "@/data/instructorMockData";
 
 interface InstructorMetricsGridProps {
@@ -18,7 +18,7 @@ export default function InstructorMetricsGrid({
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Active Batches</span>
         <div className="text-2xl sm:text-3xl font-black text-[#002b5b]">{batches.length} Batches</div>
-        <span className="text-xs text-amber-600 font-bold">Revit, Tekla, MEP</span>
+        <span className="text-xs text-[#0077b6] font-bold">Revit, Tekla, MEP</span>
       </div>
 
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
@@ -35,9 +35,9 @@ export default function InstructorMetricsGrid({
 
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Mentor Rating</span>
-        <div className="text-2xl sm:text-3xl font-black text-emerald-600">4.95 / 5.0</div>
-        <span className="text-xs text-emerald-700 font-bold flex items-center gap-1">
-          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> 450+ Student Reviews
+        <div className="text-2xl sm:text-3xl font-black text-[#002b5b]">4.95 / 5.0</div>
+        <span className="text-xs text-[#0077b6] font-bold flex items-center gap-1">
+          <Award className="w-3.5 h-3.5" /> 450+ Student Reviews
         </span>
       </div>
     </div>

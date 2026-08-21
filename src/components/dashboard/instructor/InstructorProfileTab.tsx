@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { User, Mail, Phone, Lock, Save, Award } from "lucide-react";
+import { User, Mail, Save } from "lucide-react";
 import { UserAccount } from "@/data/dummyAccounts";
 
 interface InstructorProfileTabProps {
@@ -41,11 +41,11 @@ export default function InstructorProfileTab({ currentUser }: InstructorProfileT
           <img
             src={currentUser.avatar}
             alt={currentUser.name}
-            className="w-16 h-16 rounded-2xl object-cover border-2 border-amber-500 shadow-sm"
+            className="w-16 h-16 rounded-2xl object-cover border-2 border-[#0077b6] shadow-sm"
           />
           <div>
             <h4 className="font-extrabold text-slate-900 text-base">{name}</h4>
-            <span className="text-xs text-amber-600 font-bold block">{currentUser.roleTitle}</span>
+            <span className="text-xs text-[#0077b6] font-bold block">{currentUser.roleTitle}</span>
             <span className="text-xs text-slate-400 font-mono">{currentUser.details}</span>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function InstructorProfileTab({ currentUser }: InstructorProfileT
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-amber-500 focus:outline-none"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#0077b6] focus:outline-none"
               />
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function InstructorProfileTab({ currentUser }: InstructorProfileT
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-amber-500 focus:outline-none"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#0077b6] focus:outline-none"
               />
             </div>
           </div>
@@ -85,14 +85,14 @@ export default function InstructorProfileTab({ currentUser }: InstructorProfileT
             rows={3}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full p-3.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-amber-500 focus:outline-none"
+            className="w-full p-3.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#0077b6] focus:outline-none"
           />
         </div>
 
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-[#002b5b] hover:bg-[#001830] text-white font-extrabold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>Save Profile</span>

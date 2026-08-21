@@ -26,25 +26,25 @@ export default function InstructorOverviewTab({
   return (
     <div className="space-y-8 font-sans">
       {/* Welcome & Live Launch Banner */}
-      <div className="bg-gradient-to-r from-amber-600 via-amber-700 to-[#002b5b] rounded-3xl text-white p-7 sm:p-9 shadow-lg relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="bg-gradient-to-r from-[#002b5b] via-[#0f4c81] to-[#0077b6] rounded-3xl text-white p-7 sm:p-9 shadow-lg relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-3 max-w-2xl z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 text-amber-100 text-xs sm:text-sm font-bold backdrop-blur-xs">
-            <Sparkles className="w-4 h-4 text-amber-200" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 text-sky-100 text-xs sm:text-sm font-bold backdrop-blur-xs">
+            <Sparkles className="w-4 h-4 text-sky-200" />
             <span>Instructor Console — Welcome, {currentUser.name}!</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
             Ready to Teach Your Next Live Batch?
           </h2>
-          <p className="text-xs sm:text-sm text-amber-100 font-medium">
+          <p className="text-xs sm:text-sm text-sky-100 font-medium">
             Next Session: <strong className="text-white">Revit 5th Batch • Class 29 (Tonight 9:00 PM)</strong>
           </p>
         </div>
 
         <button
           onClick={onNavigateToLive}
-          className="px-7 py-3.5 rounded-2xl bg-white text-slate-900 hover:bg-amber-50 font-black text-sm flex items-center gap-2.5 shadow-xl hover:scale-105 transition-all cursor-pointer shrink-0"
+          className="px-7 py-3.5 rounded-2xl bg-white text-[#002b5b] hover:bg-sky-50 font-black text-sm flex items-center gap-2.5 shadow-xl hover:scale-105 transition-all cursor-pointer shrink-0"
         >
-          <Video className="w-5 h-5 text-amber-600" />
+          <Video className="w-5 h-5 text-[#0077b6]" />
           <span>Launch Live Zoom</span>
         </button>
       </div>
@@ -61,7 +61,7 @@ export default function InstructorOverviewTab({
               <Clock className="w-5 h-5 text-[#0077b6]" />
               <span>Today&apos;s Live Teaching Schedule</span>
             </h3>
-            <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
+            <span className="px-3 py-1 rounded-full bg-sky-50 text-[#0077b6] text-xs font-bold border border-sky-200">
               Tonight 9:00 PM
             </span>
           </div>
@@ -114,7 +114,7 @@ export default function InstructorOverviewTab({
                 </div>
                 <button
                   onClick={onNavigateToGrading}
-                  className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shrink-0 cursor-pointer shadow-2xs"
+                  className="px-3 py-1.5 rounded-xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-bold text-xs shrink-0 cursor-pointer shadow-2xs"
                 >
                   Evaluate
                 </button>

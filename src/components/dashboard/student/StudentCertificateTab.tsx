@@ -11,12 +11,12 @@ interface StudentCertificateTabProps {
 export default function StudentCertificateTab({ currentUser }: StudentCertificateTabProps) {
   return (
     <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-8 max-w-3xl mx-auto text-center font-sans">
-      <div className="w-20 h-20 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto shadow-inner">
+      <div className="w-20 h-20 rounded-full bg-sky-50 text-[#0077b6] flex items-center justify-center mx-auto shadow-inner border border-sky-100">
         <Award className="w-10 h-10" />
       </div>
 
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-[#0077b6] text-xs font-bold uppercase tracking-wider">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>Official BIM Credential</span>
         </div>
@@ -42,7 +42,7 @@ export default function StudentCertificateTab({ currentUser }: StudentCertificat
 
         <div className="flex items-center justify-between border-b border-slate-200 pb-3">
           <span className="text-slate-500 font-bold uppercase tracking-wider">Current Status:</span>
-          <span className="px-3 py-0.5 rounded-full bg-amber-100 text-amber-800 font-extrabold text-xs">
+          <span className="px-3 py-0.5 rounded-full bg-sky-100 text-[#0077b6] font-extrabold text-xs">
             In Progress (68% Complete)
           </span>
         </div>

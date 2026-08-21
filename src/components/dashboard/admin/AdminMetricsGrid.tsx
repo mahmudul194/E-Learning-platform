@@ -17,21 +17,21 @@ export default function AdminMetricsGrid() {
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
         <span className="text-xs sm:text-sm text-slate-500 font-bold">Total Students</span>
         <div className="text-2xl sm:text-3xl font-black text-[#002b5b]">5,240</div>
-        <span className="text-xs text-sky-600 font-bold flex items-center gap-1">
+        <span className="text-xs text-[#0077b6] font-bold flex items-center gap-1">
           <Users className="w-3.5 h-3.5" /> 182 New This Month
         </span>
       </div>
 
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
         <span className="text-xs sm:text-sm text-slate-500 font-bold">Active Batches</span>
-        <div className="text-2xl sm:text-3xl font-black text-amber-600">6 Batches</div>
+        <div className="text-2xl sm:text-3xl font-black text-[#0f4c81]">6 Batches</div>
         <span className="text-xs text-slate-500 font-medium">Revit, Tekla, MEP</span>
       </div>
 
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-1.5">
         <span className="text-xs sm:text-sm text-slate-500 font-bold">Issued Certificates</span>
-        <div className="text-2xl sm:text-3xl font-black text-purple-600">3,820</div>
-        <span className="text-xs text-purple-600 font-bold flex items-center gap-1">
+        <div className="text-2xl sm:text-3xl font-black text-[#0077b6]">3,820</div>
+        <span className="text-xs text-[#0077b6] font-bold flex items-center gap-1">
           <Award className="w-3.5 h-3.5" /> QR Verified
         </span>
       </div>

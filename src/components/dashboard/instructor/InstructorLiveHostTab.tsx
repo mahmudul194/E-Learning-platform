@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Video, Copy, Check, ExternalLink, ShieldCheck, Monitor } from "lucide-react";
+import { Video, Copy, Check, ExternalLink, Monitor } from "lucide-react";
 import { InstructorBatch } from "@/data/instructorMockData";
 
 interface InstructorLiveHostTabProps {
@@ -22,7 +22,7 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
     <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8 font-sans max-w-4xl">
       <div className="border-b border-slate-100 pb-5">
         <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-          <Video className="w-5 h-5 text-amber-600" />
+          <Video className="w-5 h-5 text-[#0077b6]" />
           <span>Host Live Interactive Zoom Session</span>
         </h3>
         <p className="text-xs sm:text-sm text-slate-500">
@@ -42,11 +42,11 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
               onClick={() => setSelectedBatch(b)}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                 selectedBatch.id === b.id
-                  ? "border-amber-500 bg-amber-50/70 ring-2 ring-amber-300"
+                  ? "border-[#0077b6] bg-sky-50/70 ring-2 ring-sky-300"
                   : "border-slate-200 bg-slate-50 hover:bg-white text-slate-700"
               }`}
             >
-              <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md uppercase">
+              <span className="text-[10px] font-bold text-[#0077b6] bg-sky-100 px-2 py-0.5 rounded-md uppercase">
                 {b.code}
               </span>
               <strong className="block text-xs sm:text-sm text-slate-900 font-extrabold mt-1 truncate">
@@ -59,10 +59,10 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
       </div>
 
       {/* Live Host Launch Box */}
-      <div className="p-6 rounded-3xl bg-slate-950 text-white space-y-6 shadow-xl border border-slate-800">
+      <div className="p-6 rounded-3xl bg-[#001830] text-white space-y-6 shadow-xl border border-slate-800">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider block">
+            <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
               HOST CREDENTIALS
             </span>
             <h4 className="text-lg font-bold text-white mt-0.5">{selectedBatch.nextClassTopic}</h4>
@@ -83,7 +83,7 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
           </div>
           <div className="p-3.5 bg-white/5 rounded-2xl border border-white/10">
             <span className="text-slate-400 block">Scheduled Time</span>
-            <strong className="text-sm font-mono text-amber-300">9:00 PM Tonight</strong>
+            <strong className="text-sm font-mono text-sky-300">9:00 PM Tonight</strong>
           </div>
         </div>
 
@@ -92,7 +92,7 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
             href="https://zoom.us/j/87291024819"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:flex-1 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-102"
+            className="w-full sm:flex-1 py-3.5 rounded-2xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-102"
           >
             <Monitor className="w-4 h-4" />
             <span>Launch Zoom Meeting as Host</span>
@@ -101,7 +101,7 @@ export default function InstructorLiveHostTab({ batches }: InstructorLiveHostTab
 
           <button
             onClick={handleCopyLink}
-            className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
             <span>{copied ? "Link Copied!" : "Copy Student Link"}</span>

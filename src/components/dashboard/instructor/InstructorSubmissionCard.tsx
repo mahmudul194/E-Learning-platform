@@ -73,7 +73,7 @@ export default function InstructorSubmissionCard({
         )}
         <button
           onClick={() => onEvaluate(sub)}
-          className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs cursor-pointer shadow-xs transition-all"
+          className="px-4 py-2.5 rounded-xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-bold text-xs cursor-pointer shadow-xs transition-all"
         >
           {sub.status === "Graded" ? "Edit Grade" : "Evaluate Script"}
         </button>

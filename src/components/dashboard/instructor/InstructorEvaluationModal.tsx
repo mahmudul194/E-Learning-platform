@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, FileText, ExternalLink, HelpCircle, MessageSquare } from "lucide-react";
+import { Download, MessageSquare } from "lucide-react";
 import { StudentSubmission } from "@/data/instructorMockData";
 
 interface InstructorEvaluationModalProps {
@@ -42,7 +42,7 @@ export default function InstructorEvaluationModal({
             </div>
             <p className="text-xs text-slate-500 mt-0.5">{selectedSubmission.assignmentTitle}</p>
           </div>
-          <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full">
+          <span className="text-[11px] font-bold text-[#0077b6] bg-sky-50 px-2.5 py-1 rounded-full border border-sky-200">
             Submitted: {selectedSubmission.submittedAt}
           </span>
         </div>
@@ -103,7 +103,7 @@ export default function InstructorEvaluationModal({
                 required
                 value={scoreInput}
                 onChange={(e) => setScoreInput(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:border-amber-500 focus:outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:border-[#0077b6] focus:outline-none"
               />
             </div>
             <div className="sm:col-span-2 text-slate-500 text-xs pb-2">
@@ -119,7 +119,7 @@ export default function InstructorEvaluationModal({
               value={feedbackInput}
               onChange={(e) => setFeedbackInput(e.target.value)}
               placeholder="Provide constructive feedback on CAD layers, BIM parameters, and schedules..."
-              className="w-full p-3 rounded-xl border border-slate-300 focus:border-amber-500 focus:outline-none"
+              className="w-full p-3 rounded-xl border border-slate-300 focus:border-[#0077b6] focus:outline-none"
             />
           </div>
 
@@ -133,7 +133,7 @@ export default function InstructorEvaluationModal({
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs cursor-pointer shadow-md"
+              className="px-6 py-2.5 rounded-xl bg-[#0077b6] hover:bg-[#005a8c] text-white font-extrabold text-xs cursor-pointer shadow-md"
             >
               Submit Grade & Feedback
             </button>
