@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FileCheck, Check } from "lucide-react";
 import { StudentSubmission } from "@/data/instructorMockData";
 import InstructorEvaluationModal from "./InstructorEvaluationModal";
+import InstructorSubmissionCard from "./InstructorSubmissionCard";
 
 interface InstructorGradingTabProps {
   submissions: StudentSubmission[];
@@ -18,8 +19,10 @@ export default function InstructorGradingTab({ submissions }: InstructorGradingT
 
   const handleOpenEvaluate = (sub: StudentSubmission) => {
     setSelectedSubmission(sub);
-    setScoreInput(sub.score ? String(sub.score) : "95");
-    setFeedbackInput(sub.feedback || "Well done! The structural model alignment and schedules are accurate.");
+    setScoreInput(sub.score !== null ? String(sub.score) : "95");
+    setFeedbackInput(
+      sub.feedback || "Well done! The structural model alignment and BNBC schedule are accurate."
+    );
   };
 
   const handleSaveGrade = (e: React.FormEvent) => {
@@ -39,7 +42,7 @@ export default function InstructorGradingTab({ submissions }: InstructorGradingT
       )
     );
 
-    setSuccessMsg(`Evaluation submitted for ${selectedSubmission.studentName}!`);
+    setSuccessMsg(`Evaluation and marks published for ${selectedSubmission.studentName}!`);
     setSelectedSubmission(null);
     setTimeout(() => setSuccessMsg(null), 3000);
   };
@@ -53,7 +56,7 @@ export default function InstructorGradingTab({ submissions }: InstructorGradingT
             <span>Student Submission & Grading Console</span>
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Download submitted .rvt / .dwg models, award marks, and provide constructive feedback
+            Inspect student answer notes, download .rvt / .dwg models, and publish verified scores
           </p>
         </div>
         <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold w-fit">
@@ -71,52 +74,11 @@ export default function InstructorGradingTab({ submissions }: InstructorGradingT
       {/* Submissions List */}
       <div className="space-y-4">
         {list.map((sub) => (
-          <div
+          <InstructorSubmissionCard
             key={sub.id}
-            className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs sm:text-sm"
-          >
-            <div className="space-y-1 min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <strong className="text-slate-900 text-sm">{sub.studentName}</strong>
-                <span className="text-[11px] font-mono text-slate-500 bg-slate-200 px-2 py-0.5 rounded-md">
-                  {sub.studentRoll}
-                </span>
-                <span
-                  className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${
-                    sub.status === "Graded"
-                      ? "bg-emerald-100 text-emerald-800"
-                      : "bg-rose-100 text-rose-800"
-                  }`}
-                >
-                  {sub.status}
-                </span>
-              </div>
-              <p className="text-slate-700 font-semibold">{sub.assignmentTitle}</p>
-              <span className="text-xs text-slate-500 font-mono block">
-                File: {sub.fileName} ({sub.fileSize}) • Submitted: {sub.submittedAt}
-              </span>
-              {sub.feedback && (
-                <p className="text-xs text-emerald-800 bg-emerald-50 p-2.5 rounded-xl border border-emerald-100 mt-2">
-                  <strong>Feedback Given:</strong> {sub.feedback}
-                </p>
-              )}
-            </div>
-
-            <div className="flex items-center gap-3 shrink-0">
-              {sub.score !== null && (
-                <div className="text-center px-3">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Score</span>
-                  <span className="text-xl font-black text-emerald-600">{sub.score}/100</span>
-                </div>
-              )}
-              <button
-                onClick={() => handleOpenEvaluate(sub)}
-                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs cursor-pointer shadow-xs"
-              >
-                {sub.status === "Graded" ? "Edit Grade" : "Evaluate & Score"}
-              </button>
-            </div>
-          </div>
+            sub={sub}
+            onEvaluate={handleOpenEvaluate}
+          />
         ))}
       </div>
 

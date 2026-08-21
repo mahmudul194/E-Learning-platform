@@ -10,14 +10,22 @@ export interface InstructorBatch {
   status: "Active" | "Upcoming" | "Completed";
 }
 
+export interface StudentSubmissionFile {
+  name: string;
+  size: string;
+  type: "RVT" | "DWG" | "PDF" | "ZIP" | "LINK";
+  url: string;
+}
+
 export interface StudentSubmission {
   id: string;
   studentName: string;
   studentRoll: string;
   assignmentTitle: string;
+  assignmentInstructions: string;
+  studentNote: string;
   submittedAt: string;
-  fileName: string;
-  fileSize: string;
+  files: StudentSubmissionFile[];
   score: number | null;
   feedback: string;
   status: "Pending" | "Graded";
@@ -75,9 +83,13 @@ export const MOCK_STUDENT_SUBMISSIONS: StudentSubmission[] = [
     studentName: "Md. Ariful Islam",
     studentRoll: "BIM-2026-0842",
     assignmentTitle: "Assignment 7: 6-Storey Residential Rebar Detailing",
+    assignmentInstructions: "Model 6-Storey column rebar with ties according to BNBC 2020. Export schedule sheets to PDF.",
+    studentNote: "I have completed the structural rebar for all 6 columns as per BNBC 2020. Column schedule table is attached on sheet S-101.",
     submittedAt: "Aug 18, 2026 (10:45 PM)",
-    fileName: "Ariful_Assignment_7_Model.rvt",
-    fileSize: "36.4 MB",
+    files: [
+      { name: "Ariful_Assignment_7_Model.rvt", size: "36.4 MB", type: "RVT", url: "#" },
+      { name: "Column_Schedule_Drawing_S101.pdf", size: "4.2 MB", type: "PDF", url: "#" },
+    ],
     score: 94,
     feedback: "Excellent reinforcement detailing and automated schedule generation.",
     status: "Graded",
@@ -87,9 +99,13 @@ export const MOCK_STUDENT_SUBMISSIONS: StudentSubmission[] = [
     studentName: "Tanvir Ahmed",
     studentRoll: "BIM-2026-0855",
     assignmentTitle: "Assignment 8: Curtain Wall & Elevation Modeling",
+    assignmentInstructions: "Create custom curtain wall profiles, parametric mullions, and double-glazed facade panels.",
+    studentNote: "Sir, I designed the commercial front elevation with 50x150mm custom mullions and reflective solar glass panels.",
     submittedAt: "Aug 20, 2026 (08:30 PM)",
-    fileName: "Tanvir_CurtainWall_Project.rvt",
-    fileSize: "42.1 MB",
+    files: [
+      { name: "Tanvir_CurtainWall_Project.rvt", size: "42.1 MB", type: "RVT", url: "#" },
+      { name: "Front_Elevation_Render.pdf", size: "6.8 MB", type: "PDF", url: "#" },
+    ],
     score: null,
     feedback: "",
     status: "Pending",
@@ -99,9 +115,12 @@ export const MOCK_STUDENT_SUBMISSIONS: StudentSubmission[] = [
     studentName: "Nusrat Jahan",
     studentRoll: "BIM-2026-0861",
     assignmentTitle: "Assignment 8: Curtain Wall & Elevation Modeling",
+    assignmentInstructions: "Create custom curtain wall profiles, parametric mullions, and double-glazed facade panels.",
+    studentNote: "Attached my Revit project with spider glass fittings and parametric entrance canopy family.",
     submittedAt: "Aug 20, 2026 (09:15 PM)",
-    fileName: "Nusrat_Elevation_Model.rvt",
-    fileSize: "29.8 MB",
+    files: [
+      { name: "Nusrat_Elevation_Model.rvt", size: "29.8 MB", type: "RVT", url: "#" },
+    ],
     score: null,
     feedback: "",
     status: "Pending",
@@ -111,9 +130,13 @@ export const MOCK_STUDENT_SUBMISSIONS: StudentSubmission[] = [
     studentName: "Kazi Sazzad Hossain",
     studentRoll: "BIM-2026-0870",
     assignmentTitle: "Assignment 8: Curtain Wall & Elevation Modeling",
+    assignmentInstructions: "Create custom curtain wall profiles, parametric mullions, and double-glazed facade panels.",
+    studentNote: "Completed 3D building facade. Drive link also attached inside the zip archive.",
     submittedAt: "Aug 20, 2026 (11:00 PM)",
-    fileName: "Sazzad_Shopping_Mall_Facade.rvt",
-    fileSize: "48.2 MB",
+    files: [
+      { name: "Sazzad_Shopping_Mall_Facade.rvt", size: "48.2 MB", type: "RVT", url: "#" },
+      { name: "Facade_Sheets_Pack.zip", size: "15.4 MB", type: "ZIP", url: "#" },
+    ],
     score: null,
     feedback: "",
     status: "Pending",

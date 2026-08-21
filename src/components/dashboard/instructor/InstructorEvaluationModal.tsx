@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Download, FileText, ExternalLink, HelpCircle, MessageSquare } from "lucide-react";
 import { StudentSubmission } from "@/data/instructorMockData";
 
 interface InstructorEvaluationModalProps {
@@ -25,36 +26,99 @@ export default function InstructorEvaluationModal({
   if (!selectedSubmission) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 font-sans">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl">
-        <div className="border-b border-slate-100 pb-3">
-          <h4 className="text-base font-bold text-slate-900">
-            Evaluate {selectedSubmission.studentName}
-          </h4>
-          <p className="text-xs text-slate-500">{selectedSubmission.assignmentTitle}</p>
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 font-sans overflow-y-auto">
+      <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-5 shadow-2xl my-8 border border-slate-200">
+        
+        {/* Header */}
+        <div className="border-b border-slate-100 pb-3 flex items-start justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <h4 className="text-lg font-black text-slate-900">
+                Evaluating: {selectedSubmission.studentName}
+              </h4>
+              <span className="text-xs font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-bold">
+                {selectedSubmission.studentRoll}
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">{selectedSubmission.assignmentTitle}</p>
+          </div>
+          <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full">
+            Submitted: {selectedSubmission.submittedAt}
+          </span>
         </div>
 
-        <form onSubmit={onSave} className="space-y-4 text-xs sm:text-sm">
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-700 block">Marks (Out of 100)</label>
-            <input
-              type="number"
-              min="0"
-              max="100"
-              required
-              value={scoreInput}
-              onChange={(e) => setScoreInput(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:border-amber-500 focus:outline-none"
-            />
+        {/* 1. Student's Answer Script & Notes */}
+        <div className="p-4 rounded-2xl bg-sky-50/70 border border-sky-100 space-y-2 text-xs">
+          <div className="flex items-center gap-1.5 font-extrabold text-[#0077b6]">
+            <MessageSquare className="w-4 h-4" />
+            <span>Student&apos;s Answer Script / Project Notes:</span>
+          </div>
+          <p className="text-slate-800 leading-relaxed font-medium bg-white p-3 rounded-xl border border-sky-100/80">
+            &ldquo;{selectedSubmission.studentNote}&rdquo;
+          </p>
+        </div>
+
+        {/* 2. Submitted CAD / BIM Attachments for Review */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+            Submitted Project Files & Drawing Sheets (Click to Inspect)
+          </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {selectedSubmission.files.map((file, idx) => (
+              <a
+                key={idx}
+                href={file.url}
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert(`Downloading ${file.name} for drawing inspection.`);
+                }}
+                className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between group transition-all text-xs cursor-pointer"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="px-2 py-1 rounded-md bg-[#002b5b] text-white font-mono text-[10px] font-bold shrink-0">
+                    {file.type}
+                  </span>
+                  <div className="truncate">
+                    <span className="font-bold text-slate-900 block truncate group-hover:text-[#0077b6]">
+                      {file.name}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-mono">{file.size}</span>
+                  </div>
+                </div>
+                <Download className="w-4 h-4 text-slate-400 group-hover:text-[#0077b6] shrink-0" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Evaluation Form */}
+        <form onSubmit={onSave} className="space-y-4 pt-2 border-t border-slate-100 text-xs sm:text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-700 block">Marks (Out of 100)</label>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                required
+                value={scoreInput}
+                onChange={(e) => setScoreInput(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:border-amber-500 focus:outline-none"
+              />
+            </div>
+            <div className="sm:col-span-2 text-slate-500 text-xs pb-2">
+              <span>Rubric: 40% 3D Geometry • 40% BNBC Standard • 20% Schedule</span>
+            </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-700 block">Feedback & Corrections</label>
+            <label className="text-xs font-bold text-slate-700 block">Trainer Feedback & Corrections</label>
             <textarea
               rows={3}
               required
               value={feedbackInput}
               onChange={(e) => setFeedbackInput(e.target.value)}
+              placeholder="Provide constructive feedback on CAD layers, BIM parameters, and schedules..."
               className="w-full p-3 rounded-xl border border-slate-300 focus:border-amber-500 focus:outline-none"
             />
           </div>
@@ -63,15 +127,15 @@ export default function InstructorEvaluationModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer hover:bg-slate-200"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer hover:bg-slate-200"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs cursor-pointer shadow-md"
+              className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs cursor-pointer shadow-md"
             >
-              Save Evaluation
+              Submit Grade & Feedback
             </button>
           </div>
         </form>
